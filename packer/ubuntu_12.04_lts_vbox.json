@@ -1,25 +1,43 @@
 {
-"builders": [{
-  "type": "virtualbox",
-  "guest_os_type": "Ubuntu_64",
-  "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.3-server-amd64.iso",
-  "iso_checksum": "2cbe868812a871242cdcdd8f2fd6feb9",
-  "iso_checksum_type": "md5",
-  "ssh_username": "vagrant",
-  "ssh_password": "vagrant",
-  "ssh_wait_timeout": "30000s",
-  "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
-  "http_directory": ".",
-  "boot_command": [
-  "<esc><esc><enter><wait>",
-  "/install/vmlinuz noapic ",
-  "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-  "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-  "hostname={{ .Name }} ",
-  "fb=false debconf/frontend=noninteractive ",
-  "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
-  "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-  "initrd=/install/initrd.gz -- <enter>"
-]
-}]
+  "builders": [
+    {
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{ .Name }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "disk_size": "2000",
+      "guest_os_type": "Ubuntu_64",
+      "http_directory": ".",
+      "iso_checksum": "2cbe868812a871242cdcdd8f2fd6feb9",
+      "iso_checksum_type": "md5",
+      "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.3-server-amd64.iso",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+      "ssh_password": "vagrant",
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "30000s",
+      "type": "virtualbox",
+      "name": "ubuntu-12.04-x86"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "postinstall.sh",
+      "execute_command": "echo 'vagrant' | sudo -S bash {{.Path}}"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "{{.BuildName}}_{{.Provider}}.box",
+      "compression_level": 0
+    }
+  ]
 }

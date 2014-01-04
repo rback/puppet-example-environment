@@ -1,0 +1,3 @@
+.vagrant/
+packer/packer_cache
+*.sublime*
