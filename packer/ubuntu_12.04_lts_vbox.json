@@ -22,7 +22,7 @@
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
       "ssh_wait_timeout": "30000s",
-      "type": "virtualbox",
+      "type": "virtualbox-iso",
       "name": "ubuntu-12.04-x86"
     }
   ],
