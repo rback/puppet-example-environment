@@ -10,5 +10,7 @@ puppet-example-environment
     packer validate ubuntu_12.04_lts_vbox.json
     packer build ubuntu_12.04_lts_vbox.json
     
-    vagrant box add ubuntu_12.04_x64 packer/packer_virtualbox_virtualbox.box
+    vagrant box add ubuntu-12.04-x64 ubuntu-12.04-x86_virtualbox.box
+    cd ..
     vagrant up
+
