@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.host_name = "puppetmaster-vagrant.local"
-  config.vm.box = "ubuntu-12.04-x64"
+  config.vm.box = "centos-6.5-x86_64"
   # config.vm.box_url = "http://domain.com/path/to/above.box"
 
   config.vm.network :private_network, ip: "192.168.33.10"

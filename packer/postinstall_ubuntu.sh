@@ -1,12 +1,14 @@
 #!/bin/bash -e
 
+cd /home/vagrant
 mount -o loop VBoxGuestAdditions.iso /mnt
 yes | sh /mnt/VBoxLinuxAdditions.run
 umount /mnt
 
 # Install puppet
-rpm -ivh https://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-7.noarch.rpm
-yum install -y puppet
+wget http://apt.puppetlabs.com/puppetlabs-release-precise.deb && dpkg -i puppetlabs-release-precise.deb && rm puppetlabs-release-precise.deb
+apt-get update
+apt-get install -y puppet
 
 # Passwordless sudo for Vagrant
 echo %vagrant ALL=NOPASSWD:ALL > /etc/sudoers.d/vagrant
