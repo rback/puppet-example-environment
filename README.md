@@ -5,7 +5,8 @@ puppet-example-environment
     brew install packer
     https://www.virtualbox.org/wiki/Downloads
     http://www.vagrantup.com/downloads.html
-    
+    npm install -g bower
+
     cd packer
     packer validate ubuntu_12.04_lts_vbox.json
     packer build ubuntu_12.04_lts_vbox.json
